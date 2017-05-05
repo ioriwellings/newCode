@@ -1,0 +1,300 @@
+﻿
+@{
+    Layout = null;
+}
+@*@model  List<Langben.App.Models.SysMenuTree>*@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>管理系统</title>
+    @*左侧菜单图标字体*@
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    @*退出系统等线条图标*@
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    @*bootstrap*@
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @*home页面布局*@
+    <link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    @*框架的颜色搭配*@
+    <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" />
+    @*左侧菜单的图标*@
+    <link href="/assets/global/plugins/font-icomoon/left-icon.css" rel="stylesheet" type="text/css" />
+    @*我自己定义的样式*@
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+    <script src="assets/global/plugins/respond.min.js"></script>
+    <script src="assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    @*使页面元素产生圆角，漂亮*@
+    <link href="~/assets/global/css/components-rounded.css" rel="stylesheet" />
+    <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    @*把任何div元素包裹的内容区加上具有好的滚动条。slimscroll不占用任何视觉空间，它只出现在一个用户启动的鼠标。用户可以拖动滚动条或使用鼠标滚轮改变滚动值*@
+    <script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    @*框架*@
+    <script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+
+    <!-- 时间组件 -->
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/daterangepicker.js"></script>
+
+    <!-- 表格组件 -->
+    <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.js"></script>
+
+    <!-- 弹框 -->
+    <link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-confirm.js"></script>
+
+    @*我自己定义的js*@
+    <script src="~/Scripts/JScriptCommon.js"></script>
+
+    <script type="text/javascript">
+
+        var lastNode;
+        var lastLink;
+        $(document).ready(function () {
+            Metronic.init(); // init metronic core componets
+            Layout.init(); // init layout
+
+            $("#contentBody").load('/SysLog/', function () {
+
+            });
+            $("a[page]").click(function () {
+                var pageurl = "\\" + $(this).attr("page");
+                $("#contentBody").load(pageurl, function () {
+
+                });
+
+                $("ul.sub-menu li").find("a[page]").each(function () {
+
+                    if ($(this).attr("page") == pageurl) {
+
+                        if (lastLink != undefined) {
+                            lastLink.removeClass("active");
+                        }
+                        else {
+                            $(this).parent().parent().parent().find("span.arrow").addClass("open");
+                        }
+                        if (lastNode != undefined) {
+                            lastNode.removeClass("active");
+                            lastNode.removeClass("open");
+
+                        }
+                        $(this).parent().addClass("active");
+                        $(this).parent().parent().parent().addClass("active open");
+                        lastLink = $(this).parent();
+                        lastNode = $(this).parent().parent().parent();
+                    }
+
+                });
+            });
+        });
+
+        function toPage(url) {
+            $("#contentBody").load(url);
+        }
+
+        function SaveFeedback() {
+            var message = $.trim($("#txtMessage").val());
+            if (message == "" || message.length > 500) {
+                $("#spError").show();
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/SysFeedbackApi',
+                    data: $("#formFeed").serialize(),
+                    dataType: 'json',
+                    beforeSend: function (XMLHttpRequest) {
+                        $("#btnSave").attr({ "disabled": "disabled" });
+                    },
+                    success: function (data) {
+                        $("#spError").hide();
+                        if (data == 1) {
+                            alert("您的意见已经提交，每条意见都将由工作人员人工处理，感谢您的反馈！");
+                            $("#txtMessage").val('');
+                            $("#btnSave").removeAttr("disabled");
+                            $('#Feedback').modal('hide');
+                        }
+                        else {
+                            alert(data);
+                            $("#btnSave").removeAttr("disabled");
+                        }
+                    },
+                    error: function () {
+                        alert("错误");
+                        $("#btnSave").removeAttr("disabled");
+                    }
+                })
+            }
+
+        }
+
+    </script>
+
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content page-style-square page-sidebar-fixed" onresize="javascript: void(0);" onload="javascript: void(0);">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="#" style="margin-top:10px; font-size:larger"> </a>
+                <div class="menu-toggler sidebar-toggler hide">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <!-- END NOTIFICATION DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" src="/images/touxiang.png" /> <span class="username username-hide-on-mobile">  </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li> <a href="javascript:void(0);" onclick="CompanyInfo()"> <i class="icon-user"></i> 企业信息 </a> </li>
+                            <li> <a href="javascript:void(0);" onclick="GotoWarningSet()"> <i class="icon-bell"></i> 预警配置 </a> </li>
+                            <li> <a href="javascript:void(0);" onclick="GotoModifyPassWord()"> <i class="icon-lock"></i> 修改密码 </a> </li>
+                            <li class="divider"> </li>
+                            <li> <a href="/Login/Logout"> <i class="icon-key"></i> 退出系统 </a> </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix"> </div>
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper ">
+            <!--page-sidebar-fixed -->
+            <div class="page-sidebar navbar-collapse collapse" data-auto-scroll="true">
+                <!-- BEGIN SIDEBAR MENU -->
+
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" id="AllMenu">
+
+
+                    <li id='liRecruit'>
+                        <a href='javascript:void(0);'>
+                            <span class='icn-uniE608'>
+                                <span class='path1'></span><span class='path2'></span>
+                            </span>
+                            <span class='title'>系统设置</span> <span class='selected'></span> <span class='arrow'></span>
+                        </a>
+                        <ul id='ulRecruit' class='sub-menu'>
+                            <li id='liRecruit'>
+                                <a href='javascript:void(0);'>
+                                    <span class='tu0504'>
+                                        <span class='path1'></span><span class='path2'></span>
+                                    </span>
+                                    <span class='title'>基础设置</span> <span class='selected'></span> <span class='arrow'></span>
+                                </a>
+                                <ul id='ulRecruit' class='sub-menu'><li><a href='javascript:void(0);' page="SysLog" id="1307311605187265267d33f281da1">日志管理</a></li><li><a href='javascript:void(0);' page="SysException" id="1307311605187265267d33f281d11">异常捕获</a></li><li><a href='javascript:void(0);' page="SysField" id="1307311605187265267d33f281da9">数据字典</a></li></ul>
+                            </li>
+                            <li><a href='javascript:void(0);' page="SysDepartment" id="1311011720196053073ccff5a1c7c">部门管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysPerson" id="1307311605187265267d33f281da8">人员管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysMenu" id="1307311605187265267d33f281d12">菜单管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysOperation" id="1310181133541969540a9ad916764">操作管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysRole" id="1307311605187265267d33f281da0">角色管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysAnnouncement" id="140922145246539504969e3105325">公告管理</a></li>
+                            <li><a href='javascript:void(0);' page="SysNotice" id="1409221354139895985a030594898">通知中心</a></li>
+                            <li><a href='javascript:void(0);' page="SysEmailTemp" id="140922135507916683068629c5d43">邮件模板</a></li>
+                            <li><a href='javascript:void(0);' page="SysEmail" id="14092213562939634331abbbe7395">邮件发送记录</a></li>
+                            <li><a href='javascript:void(0);' page="SysMessageTemp" id="1409221355486530130826b670994">短信模板</a></li>
+                            <li><a href='javascript:void(0);' page="SysMessage" id="14092214142483385492f3a6614c2">短信发送记录</a></li>
+                        </ul>
+                    </li>
+
+                    <li id='liRecruit'>
+                        <a href='javascript:void(0);'>
+                            <span class='tu0625'>
+                                <span class='path1'></span><span class='path2'></span>
+                            </span>
+                            <span class='title'>个人设置</span> <span class='selected'></span> <span class='arrow'></span>
+                        </a>
+                        <ul id='ulRecruit' class='sub-menu'><li><a href='javascript:void(0);' page="http://www.langben.com" id="1307311605187265267d33f281df2">狼奔网站</a></li> </ul>
+                    </li>
+
+                    <li id='liRecruit'>
+                        <a href='javascript:void(0);'>
+                            <span class='tu0708'>
+                                <span class='path1'></span><span class='path2'></span>
+                            </span>
+                            <span class='title'>ceshi</span> <span class='selected'></span> <span class='arrow'></span>
+                        </a>
+                        <ul id='ulRecruit' class='sub-menu'> </ul>
+                    </li>
+                    <input type='hidden' id='dataSource' value='menu data from db' />
+                    @*@Html.Raw(ViewData["Menu"].ToString())*@
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+        </div>
+
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div id="contentBody" class="page-content">
+
+            </div>
+        </div>
+        <!-- END CONTENT -->
+        <!-- END CONTAINER -->
+
+
+    </div>
+    <!-- BEGIN 意见反馈 -->
+    <div class="rightFeedback">
+        <a data-toggle="modal" href="#Feedback">意<br>见<br>反<br>馈</a>
+    </div>
+    <div id="Feedback" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h5 class="modal-title">意见反馈</h5>
+                </div>
+                <form id="formFeed" action="#">
+                    <div class="modal-body">
+                        <p>
+                            我们倾听你的声音
+                        </p>
+                        <textarea name="Message" id="txtMessage" rows="5" style="height:160px" class="form-control" placeholder="欢迎提出宝贵的意见和建议。抱歉我们无法逐一回复，但我们会认真阅读，你的支持是对我们最大的鼓励和帮助。"></textarea>
+                        <span id="spError" style="display:none; color:red">反馈意见不能为空或超过500字</span>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn  green-haze" id="btnSave" onclick="SaveFeedback();">提 交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 意见反馈 -->
+
+
+</body>
+
+</html>

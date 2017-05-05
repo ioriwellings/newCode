@@ -1,0 +1,56 @@
+﻿<div class="portlet light bordered" style="margin:6px">
+    @RenderBody()
+</div>
+<!-- 验证 -->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+ 
+<script type='text/javascript'>
+
+    $(function () {
+
+        $("form").submit(function (form) {
+
+            if (form.result) {
+                @RenderSection("CurentPlaceJS", false)
+                $.ajax({
+                    url: this.action,
+                    type: "Post",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                       
+                        $.confirm({
+                            title: '操作提示',
+                            content: data,
+                            buttons: {
+                                ok: {
+                                    text: "继续",
+                                    btnClass: 'btn-primary',
+                                    keys: ['enter'],
+                                    action: function () {
+                                       
+                                    }
+                                },
+                                cancel: {
+                                    text: "返回",
+                                    btnClass: 'btn',                       
+                                    action: function () {
+                                        $("#contentBody").load("../SysLog/Index", function () {
+
+                                        });
+                                    }
+                                }
+                            }
+                        });                       
+
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+</script>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9987345354f4ff0a625e82df1e90c54" Name="Diagram1">
+        <EntityTypeShape EntityType="SysModel.City" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SysModel.FileUploader" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SysModel.GoldTemp" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SysModel.Insurance" Width="1.5" PointX="10.75" PointY="12.5" />
+        <EntityTypeShape EntityType="SysModel.MatchDetail" Width="1.5" PointX="8" PointY="10" />
+        <EntityTypeShape EntityType="SysModel.MatchResult" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SysModel.MYResult" Width="1.5" PointX="5.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SysModel.PoliceAccountNature" Width="1.5" PointX="7.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SysModel.PoliceInsurance" Width="1.5" PointX="13" PointY="10.25" />
+        <EntityTypeShape EntityType="SysModel.Rule" Width="1.5" PointX="5.75" PointY="10.5" />
+        <EntityTypeShape EntityType="SysModel.SysAnnouncement" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SysModel.SysDepartment" Width="1.5" PointX="1.5" PointY="17.75" />
+        <EntityTypeShape EntityType="SysModel.SysEmail" Width="1.5" PointX="12" PointY="5" />
+        <EntityTypeShape EntityType="SysModel.SysEmailTemp" Width="1.5" PointX="9.75" PointY="5" />
+        <EntityTypeShape EntityType="SysModel.SysException" Width="1.5" PointX="15.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SysModel.SysField" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SysModel.SysLog" Width="1.5" PointX="15.75" PointY="13.75" />
+        <EntityTypeShape EntityType="SysModel.SysMenu" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SysModel.SysMenuSysRoleSysOperation" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="SysModel.SysMessage" Width="1.5" PointX="12" PointY="1" />
+        <EntityTypeShape EntityType="SysModel.SysMessageTemp" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="SysModel.SysNotice" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SysModel.SysOperation" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="SysModel.SysPerson" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="SysModel.SysRole" Width="1.5" PointX="3" PointY="12.125" />
+        <AssociationConnector Association="SysModel.FK_CITY_REFERENCE_CITY" />
+        <AssociationConnector Association="SysModel.FK_POLICEIN_REFERENCE_INSURANC" />
+        <AssociationConnector Association="SysModel.FK_MATCHDET_REFERENCE_RULE" />
+        <AssociationConnector Association="SysModel.FK_SYSDEPAR_REFERENCE_SYSDEPAR" />
+        <AssociationConnector Association="SysModel.FK_SYSPERSO_REFERENCE_SYSDEPAR" />
+        <AssociationConnector Association="SysModel.FK_SYSEMAIL_REFERENCE_SYSEMAIL" />
+        <AssociationConnector Association="SysModel.FK_SYSFIELD_REFERENCE_SYSFIELD" />
+        <AssociationConnector Association="SysModel.FK_SYSMENU_REFERENCE_SYSMENU" />
+        <AssociationConnector Association="SysModel.FK_SYSMENUS_REFERENCE_SYSMENU2" />
+        <AssociationConnector Association="SysModel.FK_SYSMENUS_REFERENCE_SYSOPERA2" />
+        <AssociationConnector Association="SysModel.FK_SYSMENUS_REFERENCE_SYSROLE" />
+        <AssociationConnector Association="SysModel.FK_SYSMESSA_REFERENCE_SYSMESSA" />
+        <AssociationConnector Association="SysModel.SysMenuSysOperation" />
+        <AssociationConnector Association="SysModel.SysRoleSysPerson" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

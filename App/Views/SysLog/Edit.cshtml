@@ -1,0 +1,159 @@
+﻿@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+
+@model Langben.DAL.SysLog
+
+@using Common
+ 
+<div class="portlet-title">
+    <div class="caption">
+        <i class="icon-equalizer font-red-sunglo"></i>
+        <span class="caption-subject font-red-sunglo bold uppercase">日志</span>
+        <span class="caption-helper">一定要加油哦，我是来说明的。</span>
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    <form action="/SysLog/Edit" class="form-horizontal">
+        <div class="form-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PersonId, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.PersonId, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.PersonId) })
+                            @Html.ValidationMessageFor(model => model.PersonId)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Result, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Result, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Result) })
+                            @Html.ValidationMessageFor(model => model.Result)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MenuId, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.MenuId, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.MenuId) })
+                            @Html.ValidationMessageFor(model => model.MenuId)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ip, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Ip, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Ip) })
+                            @Html.ValidationMessageFor(model => model.Ip)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.State, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Message, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Message, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Message) })
+                            @Html.ValidationMessageFor(model => model.Message)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Remark, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Remark) })
+                            @Html.ValidationMessageFor(model => model.Remark)
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @Html.HiddenFor(model => model.CreateTime) @Html.HiddenFor(model => model.CreatePerson) @Html.HiddenFor(model => model.Id)
+
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-primary">修改</button>
+                            <button type="button" class="btn default" onclick="BackList('/SysLog')">返回</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- END FORM-->
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+
+
+
+</script>
+
+
+

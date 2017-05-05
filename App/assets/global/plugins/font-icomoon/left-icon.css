@@ -1,0 +1,96 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-r65zg2');
+	src:url('fonts/icomoon.eot?#iefix-r65zg2') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-r65zg2') format('woff'),
+		url('fonts/icomoon.ttf?-r65zg2') format('truetype'),
+		url('fonts/icomoon.svg?-r65zg2#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icn-"], [class*=" icn-"] {
+	font-family: 'icomoon';
+	font-size:24px;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1; float:left; margin-right:5px;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icn-uniE600 .path1:before {
+	content: "\e600";
+	color: rgb(118, 177, 209);
+}
+.icn-uniE600 .path2:before {
+	content: "\e601";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE602 .path1:before {
+	content: "\e602";
+	color: rgb(205, 183, 146);
+}
+.icn-uniE602 .path2:before {
+	content: "\e603";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE604 .path1:before {
+	content: "\e604";
+	color: rgb(120, 183, 216);
+}
+.icn-uniE604 .path2:before {
+	content: "\e605";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE606 .path1:before {
+	content: "\e606";
+	color: rgb(236, 119, 115);
+}
+.icn-uniE606 .path2:before {
+	content: "\e607";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE608 .path1:before {
+	content: "\e608";
+	color: rgb(236, 136, 177);
+}
+.icn-uniE608 .path2:before {
+	content: "\e609";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE60A .path1:before {
+	content: "\e60a";
+	color: rgb(95, 188, 145);
+}
+.icn-uniE60A .path2:before {
+	content: "\e60b";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.icn-uniE60C .path1:before {
+	content: "\e60c";
+	color: rgb(247, 198, 101);
+}
+.icn-uniE60C .path2:before {
+	content: "\e60d";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+

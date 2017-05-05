@@ -1,0 +1,408 @@
+﻿@{
+        Layout =null;
+    }
+@model Langben.DAL.SysLog
+
+@using Common
+ 
+<div id="divQuery" class="form-horizontal">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateTime, new { @class = "control-label col-md-4" })
+                <div class="col-md-8 demo">
+                    <input type="text" class="form-control" id="CreateTime" />
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @*@Html.DropDownList("StateDDL_String", Models.SysFieldModels.GetSysField("SysLog", "State"), "请选择", new { @class = "form-control", id = "StateDDL_String" })*@
+
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Message, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="Message" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <input type='hidden' id='search' name='search' />
+            <button id='langbenQuery' type='submit' class='btn btn-primary'>查 询</button>
+        </div>
+
+    </div>
+
+
+</div>
+<div class="row">
+
+    <div class="col-md-1">
+        <button onclick="langbenCreate()" class="btn default"><i class="icon-plus"></i> 创建</button>
+    </div>
+    <div class="col-md-1">
+        <button onclick="langbenSelect()" class="btn default"><i class="icon-plus"></i> 选择</button>
+    </div>
+    <div class="col-md-11">
+
+    </div>
+</div>
+<table id="langbenData" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.PersonId)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.Result)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.MenuId)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.Ip)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.State)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.CreateTime)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.CreatePerson)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.Message)</th>
+
+            <th data-orderable='false'>@Html.DisplayNameFor(model => model.Remark)</th>
+
+            <th data-visible='false'>@Html.DisplayNameFor(model => model.Id)</th>
+
+            <th data-orderable="false">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot></tfoot>
+</table>
+<style type="text/css">
+    .demo {
+        position: relative;
+    }
+    .input-mini {
+    width: 240px !important;
+}
+        .demo i {
+            position: absolute;
+            bottom: 10px;
+            right: 24px;
+            top: auto;
+            cursor: pointer;
+        }
+</style>
+ 
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        daterangepicker2("#CreateTime", true);
+
+    });
+    //时间段
+    function updateConfig() {
+        var options = {};
+        options.ranges = {
+            '今天': [moment(), moment()],
+            '昨天': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            '最近7天': [moment().subtract(6, 'days'), moment()],
+            '最近30天': [moment().subtract(29, 'days'), moment()],
+            //'This Month': [moment().startOf('month'), moment().endOf('month')],//这个月
+            //'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]//上个月
+        };
+        options.opens = 'right';//日期选择框的弹出位置
+        //options.singleDatePicker = true;//选择单个时间
+        options.buttonClasses = 'btn btn-default';
+        options.applyClass = 'btn-small btn-primary blue';
+        options.cancelClass = 'btn-small';
+        options.locale = {
+            separator: ' - ',//时间分割符
+            format: 'YYYY-MM-DD',//时间格式
+            applyLabel: '确定',
+            cancelLabel: '取消',
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                    '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            firstDay: 1
+        };
+        options.dateFormat = 'YYYY-MM-DD';
+        options.showDropdowns = true;//年月加下拉框
+        $('#CreateTime').daterangepicker(options, function (start, end, label) { console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')'); });
+    }
+
+    $(function () {
+
+        var table = $('#langbenData').DataTable({
+            select: 'single',
+
+            ajax: {
+                type: "POST",
+                url: '/SysLog/GetData',
+                contentType: 'application/json; charset=utf-8',
+                data: function (data) {
+
+                    data.search.value = $('#search').val();
+                    return data = JSON.stringify(data);
+                },
+                done: function ()
+                {
+                   
+                }
+
+            },
+            "initComplete": function(settings, json) {
+               
+                $('#langbenData tbody').on('click', 'tr', function () {
+                    
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                });
+            },
+            order: [[0, "desc"]],
+            columns: [
+
+            { data: 'PersonId' },
+
+            { data: 'Result' },
+
+            { data: 'MenuId' },
+
+            { data: 'Ip' },
+
+            { data: 'State' },
+
+                {
+                    data: 'CreateTime', render: function (data, type, full, meta) {
+
+                        return dateConvert(data);
+
+                    }
+                },
+
+            { data: 'CreatePerson' },
+
+            { data: 'Message' },
+
+            { data: 'Remark' },
+
+            { data: 'Id' },
+
+
+               { data: "操作" }
+            ],
+            columnDefs: [
+                 {
+                     targets: 1,//第一列
+                     render: function (data, type, full, meta) {
+
+                         data = (data != null) ? data : '';
+
+                         return '<a href="#" onclick="langbenView('
+                           + "'" + full.Id + "'"
+                           + ')">' + data + '</a>';
+                     }
+                 },
+                {
+                    targets: -1,//-1表示最后一列
+                    width: "70px",//固定宽度
+                    render: function (data, type, full, meta) {
+
+                        return '<div class="hidden-sm hidden-xs action-buttons"><a class="green" href="#" onclick="langbenModify('
+                            + "'" + full.Id + "'"
+                            + ')"><i class="ace-icon fa fa-pencil bigger-130"></i></a><a class="red langbenDelete" href="#" id="'
+                          + full.Id
+                            + '"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></div>' +
+                            '';
+                    }
+                }]
+
+        });
+
+    
+
+        //查询按钮
+        $("#langbenQuery").click(function () {
+            //将查询条件按照分隔符拼接成字符串
+            var search = "";
+            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+                if (this.id)
+                    search = search + this.id + "&" + this.value + "^";
+                else
+                    search = search + this.name + "&" + this.value + "^";
+            });
+
+            $('#search').val(search)
+            //重新加载DataTable
+            table.ajax.reload();
+
+        });
+
+        // 数据删除
+        $('#langbenData tbody').on('click', 'a.langbenDelete', function () {
+
+            //  var data = tables.row($(this).parents('tr')).data(); //释放注释你会有惊喜
+            var id = $(this).attr("id");
+
+            $.confirm({
+                title: '提示',
+                content: "确认删除它吗？",
+                buttons: {
+                    ok: {
+                        text: "是的",
+                        btnClass: 'btn-primary',
+                        keys: ['enter'],
+                        action: function () {
+
+                            $.post("/SysLog/Delete", { query: id }, function (res) {
+
+                                if (res == "OK") {//删除成功
+
+                                    $.alert({
+                                        title: '提示',
+                                        content: '删除成功!',
+                                        autoClose: 'cancelAction|5000',
+                                        buttons: {
+                                            cancelAction: {
+                                                text: '知道了',
+                                                action: function () {
+                                                }
+                                            },
+                                        }
+                                    });
+
+                                    //重新加载DataTable
+                                    table.ajax.reload();
+
+                                }
+                                else {//删除失败
+
+                                    $.alert({
+                                        title: '提示',
+                                        content: res,
+                                        buttons: {
+                                            cancelAction: {
+                                                text: '知道了',
+                                                action: function () {
+                                                }
+                                            },
+                                        }
+                                    });
+
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: "稍等等",
+                        btnClass: 'btn',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+        });
+        
+        });
+    //创建
+    function langbenCreate() {
+
+        $("#contentBody").load("/SysLog/Create", function () {
+
+        });
+
+    }
+    //修改
+    function langbenModify(id) {
+
+        var url = "../SysLog/Edit/" + id;
+        $("#contentBody").load(url, function () {
+
+        });
+
+    };
+    //选择
+    function langbenSelect() {
+
+        $.dialog({
+            title: '',
+            columnClass: 'col-md-8 col-md-offset-2',
+            backgroundDismiss: true,
+            content: function () {
+                var self = this;
+                return $.ajax({
+                    url: '/SysLog/Index/',
+                    method: 'get'
+                }).done(function (response) {
+                    var reg = new RegExp("langbenData", "g");//g,表示全部替换。
+
+                    var data = (response).replace(reg, 'langbenData1');
+                    debugger;
+                    self.setContent(data); // 加入获取的数据
+                   // self.setContent(response); // 加入获取的数据
+
+                }).fail(function () {
+
+                    self.setContent('出错了，请关了重试。');
+
+                });
+            }
+
+        });
+
+    };
+    //查看详细
+    function langbenView(id) {
+
+        $.dialog({
+            title: '',
+            columnClass: 'col-md-8 col-md-offset-2',
+            backgroundDismiss: true,
+            content: function () {
+                var self = this;
+                return $.ajax({
+                    url: '/SysLog/Details/' + id,
+                    method: 'get'
+                }).done(function (response) {
+
+                    self.setContent(response); // 加入获取的数据
+
+                }).fail(function () {
+
+                    self.setContent('出错了，请关了重试。');
+
+                });
+            }
+
+        });
+
+    };
+
+</script>
+

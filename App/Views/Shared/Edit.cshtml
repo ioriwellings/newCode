@@ -1,0 +1,57 @@
+﻿<div class="portlet light bordered">
+    @RenderBody()
+</div>
+<!-- 验证 -->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script type='text/javascript'>
+
+    $(function () {
+
+        $("form").submit(function (form) {
+
+            if (form.result) {
+             
+                $.ajax({
+                    url: this.action,
+                    type: "Post",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success: function (data) {
+
+                        $.confirm({
+                            title: '操作提示',
+                            backgroundDismiss: true,//Click outside the dialog, and i shall close!'
+                            content: data,
+                            buttons: {
+                                ok: {
+                                    text: "继续",
+                                    btnClass: 'btn-primary',
+                                    keys: ['enter'],
+                                    action: function () {
+                                     
+                                    }
+                                },
+                                cancel: {
+                                    text: "返回",
+                                    btnClass: 'btn',
+                                    action: function () {
+                                        $("#contentBody").load("/SysLog", function () {
+
+                                        });
+                                    }
+                                }
+                            }
+                        });                      
+
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+</script>
+
