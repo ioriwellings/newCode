@@ -349,3 +349,8 @@ textarea {
             -ms-transform: scale(1.2);
             transform: scale(1.2);
         }
+
+/*详情*/
+.datails-table{}
+.datails-table .row{border-bottom:1px solid #DDDDDD; margin-bottom:10px}
+.datails-table .control-label{ color:#999}
