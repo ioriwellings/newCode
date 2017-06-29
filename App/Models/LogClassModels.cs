@@ -56,10 +56,10 @@ namespace Langben.App.Models
                     sysLog.CreatePerson = AccountModel.GetCurrentPerson();
                     sysLog.MenuId = logType;//哪个模块生成的日志
 
-                    using (var sysLogRepository = new SysLogBLL())
+                    //using (var sysLogRepository = new SysLogBLL())
                     {
                         ValidationErrors validationErrors = new ValidationErrors();
-                        sysLogRepository.Create(ref validationErrors, sysLog);
+                        //sysLogRepository.Create(ref validationErrors, sysLog);
                         return;
                     }
                 }

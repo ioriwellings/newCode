@@ -120,8 +120,6 @@
     <Compile Include="SysLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SysLogMeta.cs" />
-    <Compile Include="SysLogRepository.cs" />
     <Compile Include="SysMenu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
