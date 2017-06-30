@@ -179,15 +179,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelper\CheckBoxListHelper.cs" />
-    <Compile Include="HtmlHelper\Easyui.cs" />
-    <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
+    <Compile Include="Models\HtmlHelper\CheckBoxListHelper.cs" />
+    <Compile Include="Models\HtmlHelper\Easyui.cs" />
+    <Compile Include="Models\HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Models\DatatablesViewModel.cs" />
     <Compile Include="Models\LogClassModels.cs" />
     <Compile Include="Models\SupportFilter.cs" />
+    <Compile Include="Models\SysFieldModels.cs" />
     <Compile Include="Models\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -196,59 +196,50 @@
 
                 <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" id="AllMenu">
 
-
+                    <li id='liRecruit' class="open">
+                        <a href='javascript:void(0);'>
+                            <span class='icn-uniE608'>
+                                <span class='path1'></span><span class='path2'></span>
+                            </span>
+                            <span class='title'>业务系统</span> <span class='selected'></span> <span class='arrow open'></span>
+                        </a>
+                        <ul id='ulRecruit' class='sub-menu' style="display: block;">
+                            ^homeTable^
+                        </ul>
+                    </li>
                     <li id='liRecruit'>
                         <a href='javascript:void(0);'>
                             <span class='icn-uniE608'>
                                 <span class='path1'></span><span class='path2'></span>
                             </span>
-                            <span class='title'>系统设置</span> <span class='selected'></span> <span class='arrow'></span>
+                            <span class='title'>视图展示</span> <span class='selected'></span> <span class='arrow'></span>
                         </a>
                         <ul id='ulRecruit' class='sub-menu'>
-                            <li id='liRecruit'>
-                                <a href='javascript:void(0);'>
-                                    <span class='tu0504'>
-                                        <span class='path1'></span><span class='path2'></span>
-                                    </span>
-                                    <span class='title'>基础设置</span> <span class='selected'></span> <span class='arrow'></span>
-                                </a>
-                                <ul id='ulRecruit' class='sub-menu'><li><a href='javascript:void(0);' page="SysLog" id="1307311605187265267d33f281da1">日志管理</a></li><li><a href='javascript:void(0);' page="SysException" id="1307311605187265267d33f281d11">异常捕获</a></li><li><a href='javascript:void(0);' page="SysField" id="1307311605187265267d33f281da9">数据字典</a></li></ul>
-                            </li>
-                            <li><a href='javascript:void(0);' page="SysDepartment" id="1311011720196053073ccff5a1c7c">部门管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysPerson" id="1307311605187265267d33f281da8">人员管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysMenu" id="1307311605187265267d33f281d12">菜单管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysOperation" id="1310181133541969540a9ad916764">操作管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysRole" id="1307311605187265267d33f281da0">角色管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysAnnouncement" id="140922145246539504969e3105325">公告管理</a></li>
-                            <li><a href='javascript:void(0);' page="SysNotice" id="1409221354139895985a030594898">通知中心</a></li>
-                            <li><a href='javascript:void(0);' page="SysEmailTemp" id="140922135507916683068629c5d43">邮件模板</a></li>
-                            <li><a href='javascript:void(0);' page="SysEmail" id="14092213562939634331abbbe7395">邮件发送记录</a></li>
-                            <li><a href='javascript:void(0);' page="SysMessageTemp" id="1409221355486530130826b670994">短信模板</a></li>
-                            <li><a href='javascript:void(0);' page="SysMessage" id="14092214142483385492f3a6614c2">短信发送记录</a></li>
+                            ^homeView^
                         </ul>
-                    </li>
+                </li>
 
-                    <li id='liRecruit'>
-                        <a href='javascript:void(0);'>
-                            <span class='tu0625'>
-                                <span class='path1'></span><span class='path2'></span>
-                            </span>
-                            <span class='title'>个人设置</span> <span class='selected'></span> <span class='arrow'></span>
-                        </a>
-                        <ul id='ulRecruit' class='sub-menu'><li><a href='javascript:void(0);' page="http://www.langben.com" id="1307311605187265267d33f281df2">狼奔网站</a></li> </ul>
-                    </li>
+                <li id='liRecruit'>
+                    <a href='javascript:void(0);'>
+                        <span class='tu0625'>
+                            <span class='path1'></span><span class='path2'></span>
+                        </span>
+                        <span class='title'>个人设置</span> <span class='selected'></span> <span class='arrow'></span>
+                    </a>
+                    <ul id='ulRecruit' class='sub-menu'><li><a href='javascript:void(0);' page="http://www.langben.com" id="1307311605187265267d33f281df2">狼奔网站</a></li> </ul>
+                </li>
 
-                    <li id='liRecruit'>
-                        <a href='javascript:void(0);'>
-                            <span class='tu0708'>
-                                <span class='path1'></span><span class='path2'></span>
-                            </span>
-                            <span class='title'>ceshi</span> <span class='selected'></span> <span class='arrow'></span>
-                        </a>
-                        <ul id='ulRecruit' class='sub-menu'> </ul>
-                    </li>
-                    <input type='hidden' id='dataSource' value='menu data from db' />
-                    @*@Html.Raw(ViewData["Menu"].ToString())*@
+                <li id='liRecruit'>
+                    <a href='javascript:void(0);'>
+                        <span class='tu0708'>
+                            <span class='path1'></span><span class='path2'></span>
+                        </span>
+                        <span class='title'>ceshi</span> <span class='selected'></span> <span class='arrow'></span>
+                    </a>
+                    <ul id='ulRecruit' class='sub-menu'> </ul>
+                </li>
+                <input type='hidden' id='dataSource' value='menu data from db' />
+                @*@Html.Raw(ViewData["Menu"].ToString())*@
                 </ul>
                 <!-- END SIDEBAR MENU -->
             </div>

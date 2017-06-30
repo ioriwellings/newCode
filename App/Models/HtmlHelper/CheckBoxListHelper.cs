@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Common;
 using System.Linq.Expressions;
-namespace Models
+namespace Langben.App.Models
 {
     public static class CheckBoxListHelper
     {

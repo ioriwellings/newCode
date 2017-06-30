@@ -16,8 +16,8 @@ namespace Langben.App.Models
             Account account = AccountModel.GetCurrentAccount();
             if (account == null)
             {
-                filterContext.HttpContext.Response.Write(" <script type='text/javascript'> window.top.location='Account'; </script>");
-                filterContext.Result = new EmptyResult();
+                //filterContext.HttpContext.Response.Write(" <script type='text/javascript'> window.top.location='Account'; </script>");
+                //filterContext.Result = new EmptyResult();
                 return;
             }
 

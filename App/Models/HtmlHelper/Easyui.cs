@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Models
+namespace Langben.App.Models
 {  
     /// <summary>
     /// easyui中的datagrid
