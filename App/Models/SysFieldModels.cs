@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Langben.BLL;
 using Langben.IBLL;
-namespace  Models
+namespace Langben.App.Models
 {
     public class SysFieldModels
     {
